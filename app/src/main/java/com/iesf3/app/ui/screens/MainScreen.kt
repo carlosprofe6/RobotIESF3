@@ -148,12 +148,23 @@ suspend fun performGreetingRoutine(viewModel: RobotViewModel) {
     viewModel.parar()
 
     delay(500) // Pequeña pausa antes de hablar
+    viewModel.mirarArriba();
+    delay(500)
+    viewModel.mirarArriba();
+
+    delay(500) // Pequeña pausa antes de hablar
 
     // 2. Hablar
     // Calculamos el delay según la longitud del texto o fijo si es siempre igual
     val textoSaludo = "¡Hola! Bienvenidos al Instituto Fernando III, centro de excelencia."
     viewModel.speak(textoSaludo)
     delay(6000) // Esperamos 6 segundos a que termine de hablar (estimación)
+
+    delay(500) // Pequeña pausa antes de hablar
+    viewModel.mirarArriba();
+    delay(500)
+    viewModel.mirarArriba();
+    delay(500) // Pequeña pausa antes de hablar
 
     // 3. Retroceder
     viewModel.irAtras()
