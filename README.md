@@ -6,31 +6,21 @@ Bienvenido al repositorio oficial del proyecto de control robótico desarrollado
 
 👨‍💻 Créditos del Proyecto
 
-Rol
-
-Nombre
-
-Institución
-
-Desarrollador Principal
-
 Carlos Barroso
 
 🏫 IES Fernando III
 
 Especialidad
 
-Informática
-
-Educación Secundaria
+Informática - Educación Secundaria
 
 🚀 Funcionalidades Principales
 
-🗣️ Interacción por Voz Avanzada ("Oye Paco")
+🗣️ Interacción por Voz Avanzada ("Oye Juan")
 
 El robot siempre está escuchando. Utilizando el motor ASR del SDK, hemos implementado un hotword personalizado.
 
-Comando: "Oye Paco, [pregunta]"
+Comando: "Oye Juan, [pregunta]"
 
 Acción: El robot procesa tu voz y responde inteligentemente.
 
