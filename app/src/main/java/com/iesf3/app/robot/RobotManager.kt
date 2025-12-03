@@ -254,7 +254,7 @@ class RobotManager @Inject constructor(
     }
 
     // Movimiento base
-    fun moveForward()  { RobotApi.getInstance().goForward (0, 0.3f, 1f, true, commandListener) }
+    fun moveForward()  { RobotApi.getInstance().goForward (0, 0.3f, 2f, true, commandListener) }
     fun moveBackward() { RobotApi.getInstance().goBackward(0, 0.3f,          commandListener) }
     fun moveLeft()     { RobotApi.getInstance().turnLeft  (0, 0.3f,          commandListener) }
     fun moveRight()    { RobotApi.getInstance().turnRight (0, 0.3f,          commandListener) }

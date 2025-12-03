@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">IES F3 APP</string>
+
+    <string name="welcome_message">Bienvenido al IES Fernando III</string>
 </resources>

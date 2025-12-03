@@ -24,7 +24,7 @@ fun ChatGPTScreen(navController: NavController, robotViewModel: RobotViewModel) 
     var lastSent by remember { mutableStateOf("") }
     val focusManager = LocalFocusManager.current
 
-    // Detectar cuando hay nueva voz y enviar a GPT si se activó "Hablar con Paco"
+    // Detectar cuando hay nueva voz y enviar a GPT si se activó "Hablar con Rafa"
     LaunchedEffect(speechText) {
         if (lastSent.isNotBlank() && speechText != lastSent) {
             robotViewModel.sendMessage(speechText)
@@ -44,29 +44,8 @@ fun ChatGPTScreen(navController: NavController, robotViewModel: RobotViewModel) 
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
-            Text("Token de ChatGPT", style = MaterialTheme.typography.titleLarge)
 
-            TextField(
-                value = token,
-                onValueChange = { token = it },
-                label = { Text("Token") },
-                modifier = Modifier.fillMaxWidth(),
-                singleLine = true, // <- una sola línea
-                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
-                keyboardActions = KeyboardActions(
-                    onDone = { focusManager.clearFocus() } // <- cierra teclado
-                )
-            )
-
-            Button(onClick = {
-                robotViewModel.setChatGptToken(token)
-            }) {
-                Text("Guardar Token")
-            }
-
-            Divider(modifier = Modifier.padding(vertical = 8.dp))
-
-            Text("Prueba hablada con ChatGPT", style = MaterialTheme.typography.titleMedium)
+            Text("Comandos de voz", style = MaterialTheme.typography.titleMedium)
 
             Button(
                 onClick = {
@@ -74,7 +53,7 @@ fun ChatGPTScreen(navController: NavController, robotViewModel: RobotViewModel) 
                     lastSent = speechText
                 }
             ) {
-                Text("Hablar con Paco")
+                Text("Hablar con Rafa")
             }
 
             if (speechText.isNotBlank()) {
@@ -88,7 +67,7 @@ fun ChatGPTScreen(navController: NavController, robotViewModel: RobotViewModel) 
             val assistantResponse = messages.lastOrNull { it.first == "assistant" }?.second
             if (!assistantResponse.isNullOrBlank()) {
                 Text(
-                    text = "Respuesta de Paco:\n$assistantResponse",
+                    text = "Respuesta de Rafa:\n$assistantResponse",
                     modifier = Modifier.padding(top = 16.dp)
                 )
             }

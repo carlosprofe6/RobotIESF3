@@ -8,7 +8,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.iesf3.app.chatGPT.ChatGPTManager
-import com.iesf3.app.mqtt.MqttManager
 import com.iesf3.app.preferences.PreferencesRepository
 import com.iesf3.app.robot.RobotManager
 import com.iesf3.app.robot.SkillApiService
@@ -78,8 +77,6 @@ class RobotViewModel @Inject constructor(
         // Configuración de detección de personas (se reintenta si no hay)
         configurePersonDetection()
 
-        // MQTT si está configurado en preferencias
-        initMqttIfConfigured(getApplication<Application>().applicationContext)
 
         // Parciales de voz (vía SkillApiService) -> StateFlow para Compose
         skillApiService.partialSpeechResult.observeForever { speechResult ->
@@ -108,6 +105,9 @@ class RobotViewModel @Inject constructor(
     fun pararSeguimiento()     = robotManager.stopDetection()
     fun irAdelante()           = robotManager.moveForward()
     fun parar()                = robotManager.stopForward()
+
+    fun irDerecha()           = robotManager.moveRight()
+    fun irIzquierda()           = robotManager.moveLeft()
     fun irAtras()              = robotManager.moveBackward()
     fun mirarArriba()          = robotManager.moveHeadUp()
     fun mirarAbajo()           = robotManager.moveHeadDown()
@@ -179,27 +179,5 @@ class RobotViewModel @Inject constructor(
     fun setMqttUser(user: String)  = preferencesRepo.setMqttUsuario(user)
     fun getMqttPassword(): String  = preferencesRepo.getMqttPassword()
     fun setMqttPassword(pass: String) = preferencesRepo.setMqttPassword(pass)
-
-    /** Arranca MQTT si hay IP+ClientId configurados en preferencias. */
-    fun initMqttIfConfigured(context: Context) {
-        val ip = preferencesRepo.getBrokerIp()
-        val user = preferencesRepo.getMqttUsuario()
-        val password = preferencesRepo.getMqttPassword()
-        val clientId = preferencesRepo.getMqttClient()
-
-        if (ip.isNotBlank() && clientId.isNotBlank()) {
-            MqttManager.init(
-                context = context,
-                serverUri = ip,
-                clientId = clientId,
-                user = user,
-                password = password,
-                onConnected = { Log.d("MQTT", "Conectado desde ViewModel") },
-                onError = { Log.e("MQTT", "Error desde ViewModel: ${it.message}") }
-            )
-        } else {
-            Log.w("MQTT", "Configuración MQTT incompleta")
-        }
-    }
 
 }
